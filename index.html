@@ -88,13 +88,13 @@
 
   <script src="app.js"></script>
 
-  <!-- REGISTRO SERVICE WORKER -->
+  <!-- SERVICE WORKER CORRECTO PARA GITHUB PAGES -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js')
+        navigator.serviceWorker.register('./service-worker.js', { scope: './' })
           .then(function(registration) {
-            console.log('Service Worker registrado:', registration.scope);
+            console.log('Service Worker registrado correctamente:', registration.scope);
           })
           .catch(function(error) {
             console.log('Error registrando Service Worker:', error);
