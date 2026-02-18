@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NurSync_BP</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f4c81">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="bgOverlay"></div>
+
+  <main class="phone">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brandLogo" src="icon-192.png" alt="NurSync" />
+        <div class="brandText">
+          <div class="brandName">NurSync<sup>BP</sup></div>
+          <div class="brandSub">Soporte de valoración de riesgos</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SCREEN: HOME -->
+    <section id="screen-home" class="screen active">
+      <h1 class="title">Seleccionar Escala</h1>
+      <p class="subtitle">Elige la escala a evaluar.</p>
+
+      <div class="menu">
+        <button class="pill btn-norton" onclick="openScale('norton')">
+          <span class="ico">🛏️</span>
+          <span>Escala de Norton</span>
+          <span class="chev">›</span>
+        </button>
+
+        <button class="pill btn-morse" onclick="openScale('morse')">
+          <span class="ico">🚶‍♀️</span>
+          <span>Escala de Morse</span>
+          <span class="chev">›</span>
+        </button>
+
+        <button class="pill btn-ginebra" onclick="openScale('ginebra')">
+          <span class="ico">🫁</span>
+          <span>Escala de Ginebra</span>
+          <span class="chev">›</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SCREEN: FORM -->
+    <section id="screen-form" class="screen">
+      <button class="back" onclick="goHome()">←</button>
+      <h1 id="formTitle" class="title">Evaluación</h1>
+      <p class="subtitle">Selecciona las opciones que correspondan:</p>
+
+      <div id="formFields" class="form"></div>
+
+      <button id="calcBtn" class="primary" onclick="calculate()">Calcular Riesgo</button>
+    </section>
+
+    <!-- SCREEN: RESULT -->
+    <section id="screen-result" class="screen">
+      <button class="back" onclick="goHome()">←</button>
+      <h1 class="title">Resultado</h1>
+
+      <div id="resultBadge" class="badge red">
+        <div class="badgeTop">Puntuación</div>
+        <div id="scoreValue" class="badgeScore">0</div>
+        <div id="riskLabel" class="badgeBottom">Riesgo</div>
+      </div>
+
+      <div id="riskStrip" class="strip red">Riesgo detectado.</div>
+
+      <div class="recCard">
+        <div class="recHead">✅ Recomendación</div>
+        <div id="recText" class="recBody">—</div>
+      </div>
+
+      <button class="secondary" onclick="goHome()">Nueva Evaluación</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+
+  <!-- REGISTRO SERVICE WORKER -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(function(registration) {
+            console.log('Service Worker registrado:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Error registrando Service Worker:', error);
+          });
+      });
+    }
+  </script>
+
+</body>
+</html>
